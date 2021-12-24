@@ -1,0 +1,85 @@
+
+<!-- saved from url=(0455)https://verify.accendolab.co.uk/#C02U::20150170270365412540900290001494:1xsImU*I4avclAy6KpCVA)QA8BwdI+k_EhK2Ogdnzx-1004000421-1-0:Dz~o$uTx*pWZkWeuuPGLc8OT8adTTGKOMPFm&oX8g-F?sIFfh+=tR0~@z(yDYx++PZeppQw*Kw2jqN3lcxp:S2m8CbNS_4VO$FLHabc3t@QkbS30IA42njtA*.C@RD$Hr1_ZpXH7Y9M8Ki4bZs=qykk;Cs;X5Z(D+c0!E30+L$E56obq)Fe(nA3G46MX+w;HhA9vcPicCDD$8=moBe(hya.!xYI(*;(HQ1aH~z&*))1ouB~HD$F4M.t8cCitrC!YaI@qUObA~NRXOYkC=_t+7qe;6qzTh&Wc7bQMzwm9Z*vnD.j1fCjZ3oQy@GPSj85b9TX0f -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Document Validator</title>
+    
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0 minimal-ui">
+    <link rel="stylesheet" href="./Document Validator_files/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="./Document Validator_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      
+    <script src="./Document Validator_files/jquery.min.js"></script>
+    <script src="./Document Validator_files/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="./Document Validator_files/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      
+    <script type="text/javascript" src="./Document Validator_files/pdf.js"></script>
+    <script type="text/javascript" src="./Document Validator_files/pdf.worker.js"></script>
+  </head>
+  <body dir="ltr">
+    <nav class="navbar navbar-expand-md fixed-top navbar-light bg-light" style="border-bottom:1px solid black">
+      <div style="width:100%; height:40px; display:flex; justify-content:center">
+	      <img style="height:100%; flex: 0 1 auto; margin-right: 20px" src="./Document Validator_files/logo.png">
+        <a class="navbar-brand" href="https://verify.accendolab.co.uk/#">
+          <span id="app-name" class="nav-title">Document Validator</span>
+        </a>
+      </div>
+    </nav>
+    <div class="container" style="margin-top:60px">
+      <br>
+      <div id="validator"><div style="display: flex; justify-content: center;"><button class="btn btn-outline-dark" style="float: left;"><i class="fa fa-camera"></i> <span id="use-camera">Use Camera</span></button><button class="btn btn-outline-dark" style="float: left; margin-inline-start: 5px;"><i class="fa fa-upload"></i> <span id="upload">Upload Image/PDF File</span></button></div><canvas id="qr-code-canvas" width="300px" height="300px" style="display: none;"></canvas><input accept=".fileInput,.jpg,.jpeg,.png,.pdf" id="fileInput" type="file" style="display: none;"><div id="loading-camera" class="align-middle text-center" style="display: none;"><div class="spinner-border" role="status"></div><div><strong>Loading camera...</strong></div></div><div id="generating" style="display: none; margin-top: 8px; max-width: 400px;"><span id="statusMessage" class="align-middle"></span></div><div style="display: flex; justify-content: center; overflow-x: hidden;"><canvas id="canvas" hidden=""></canvas><div id="vid-overlay-in" style="display: none;"><div id="vid-overlay-line" class="blink-anim" style="border-top: 2px solid red; height: 2px; position: absolute; width: 100%; padding: 0px 4px;"></div></div><br></div><div class="alert alert-primary" role="alert" style="display: none;">Having trouble? Please make sure that you have enough distance between your camera and the QR code. If the problem persists, you may want to try our<a class="alert-link" href="http://gotoqr.com/verifyandroid">Android App </a>or <a class="alert-link" href="http://gotoqr.com/verifyios"> IOS App</a> for better experience.</div><div id="pageSelectionModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header" style="display: block;"><h5 class="modal-title" id="exampleModalLabel">Choose Pages</h5><div><span>Showing pages 1 to 0</span><span style="float: right; margin-top: -12px;"><form class="form-inline"><div class="form-group"><label for="go-to-page" style="margin-right: 8px;">Go to page</label><input type="number" class="form-control" id="go-to-page"><button type="button" class="btn btn-primary" style="margin-left: 8px;">Go</button></div></form></span></div><div class="alert alert-info" role="alert" style="margin-bottom: 0px; margin-top: 8px;">QR code was not found on first, second, and last page. Please select the page manually.</div></div><div class="modal-body"><div class="page-selector-carousel"><div id="pageSelectionElement"><span class="card" style="width: 14rem; float: left;"><canvas class="card-img-top" style="height: 20rem;"></canvas><div class="card-body align-middle" style="text-align: center;"><div style="display: inline-block;"><input class="page-checkbox-temp" type="checkbox"><strong class="card-title" style="margin-left: 4px;">1</strong></div></div></span></div></div></div><div class="modal-footer" style="display: inline-block;"><div style="float: left;"><span style="border-right: 3px solid rgb(214, 214, 214); padding-right: 4px;"><button type="button" class="btn btn-light" disabled="">First Page</button><button type="button" class="btn btn-light" disabled="">Last Page</button></span><button type="button" class="btn btn-light" disabled="">Previous</button><button type="button" class="btn btn-light" disabled="">Next</button></div><div style="float: right;"><button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin: 0px 4px;">Cancel</button><button type="button" class="btn btn-primary" style="margin: 0px 4px;">Verify</button></div></div></div></div></div><canvas class="temp-canvas" style="display: none;"></canvas><div id="alertTokenError" class="modal" tabindex="-1" role="dialog"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Session Expired</h5></div><div class="modal-body"><p>Sorry, your session has expired. Please reload the page and try again.</p></div><div class="modal-footer"><button type="button" class="btn btn-primary">Reload</button></div></div></div></div><ul class="nav nav-tabs" style="display: none;"><li class="nav-item"><a class="nav-link active" data-toggle="tab" href="https://verify.accendolab.co.uk/#validationTab-0">QR: 1</a></li></ul><div class="tab-content"><div class="tab-pane fade active show" id="validationTab-0" role="tabpanel"><div class="text-center" id="validationHeader"><p style="color: rgb(40, 167, 69); font-size: 1.1em; text-transform: uppercase; font-weight: bold;">✔ Verification Success</p><img src="./Document Validator_files/logo(1).png" style="max-width: 75%;"><br>The Following details are confirmed by:<br><a href="https://verify.accendolab.co.uk/">verify.accendolab.co.uk</a></div><table class="table table-sm"><tbody id="validationContent" style="background-color: rgb(238, 238, 238); white-space: pre-wrap;"><tr><td>Name</td><td colspan="2">Cagdas Gur</td></tr><tr><td>Test result</td><td colspan="2">Negative</td></tr><tr><td>Test result date</td><td colspan="2">23/12/2021 22:53</td></tr><tr><td>Passport</td><td colspan="2">561185866</td></tr><tr><td>AccendoLab barcode</td><td colspan="2">AL00050960</td></tr></tbody></table></div></div></div>
+      <script>
+        
+        
+	var webvaltoken = "[QVAL:201132060150178225999008]eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJoIjoicTIucXJ5cHRhbC5uZXQiLCJvIjoxMDAxMTAwLCJleHAiOjE5NTExNDI0MDAsImp0aSI6IjIwMTEzMjA2MDE1MDE3ODIyNTk5OTAwOCJ9.tty8oQ61wOlHJC6DsqdO32Ao0GyHZ6c2b_SXskOHSrg"
+	var orgid= "";
+        
+	var url = "https://qval2.qryptal.net"
+        var scannerPath= "/static/js/qr-scanner-worker.js";
+        var defaultval = window.location.hash.replace("#","");
+      </script>
+    </div>
+    <div style="text-align:center">
+      <div style="display:inline-block;">
+        <p>
+	</p><h5 id="h2-click-title">For instant validation of secure code, choose an option above or install the Document Validator App below</h5>
+        <p></p>
+        <div style="max-width:800px; margin-left: 20px; text-align:left">
+
+          <p><a href="https://apps.apple.com/us/app/document-validator/id910037718">
+            <img src="./Document Validator_files/appstore60.png" alt="Validator iOS">
+          </a> 
+          <a href="https://play.google.com/store/apps/details?id=com.qryptal.verifydetailsauthenticate.android">
+            <img style="height:56px" src="./Document Validator_files/getitplaystore60.png" alt="Validator Android"></a></p><a href="http://gotoqr.com/verifyandroid">
+          </a> 
+          <div id="smslink" style="margin-bottom: 10px; display: none;">
+		  <a id="slink" title="Click here to Send App install link by SMS" href="sms:?&amp;body=To%20install%20Document%20Validator%20App,%20visit:%20https%3A//verify.accendolab.co.uk">Send App install link by SMS</a>
+	  </div>
+	  <h5 id="security-and-privacy">Security and Privacy</h5>
+          <p id="sp-1">Qryptal helps to make documents secure, tamper proof and easily verifiable by cryptographically generating and placing a digitally signed QR code incorporating the details to be secured. Each code is digitally signed by the private key of the issuing organisation. The App uses the organisation’s public key to instantly validate on the mobile device itself.</p>
+
+          <p id="sp-2">This helps to maintain the security and privacy for all concerned - the document holder, the verifier and the generator of the information.</p>
+
+        </div>
+      </div>
+    </div>
+      <footer class="container" style="margin-top:100px">
+    <hr>
+    <div id="logoname" class="text-center">
+	    <a href="https://www.qryptal.com/?utm_source=verify.accendolab.co.uk" target="blank" style="text-decoration: none !important;">
+        <img src="./Document Validator_files/favicon.ico" style="height:35px">
+      </a><br>
+      <span>Powered by</span>
+      <a href="https://www.qryptal.com/"><span class="qlogoname">Qryptal</span></a><br><br>
+    </div>
+  </footer>
+  <script crossorigin="" type="text/javascript" src="./Document Validator_files/webval.js"></script>
+  <script>
+    $(document).ready(function(){
+        var isPhone = /(android|iphone|ipad|ipod)/i.test(navigator.userAgent);
+        if (!isPhone) $('div#smslink').hide();
+
+    });
+  </script>
+  
+
+
+</body></html>
